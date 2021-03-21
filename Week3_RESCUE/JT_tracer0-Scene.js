@@ -318,7 +318,7 @@ CScene.prototype.initScene = function(num) {
       //-----Disk 1------           
       this.item.push(new CGeom(RT_DISK));         // Append 2D disk to item[] &
       iNow = this.item.length -1;                 // get its array index.
-//      console.log('iNow should be 1; it is:', iNow);
+      //console.log('iNow should be 1; it is:', iNow);
       // set up distinctive coloring:
   	  vec4.set(this.item[iNow].gapColor,  0.3,0.6,0.7,1.0); // RGBA(A==opacity) bluish gray   
   	  vec4.set(this.item[iNow].lineColor, 0.7,0.3,0.3,1.0);  // muddy red
@@ -365,10 +365,10 @@ CScene.prototype.initScene = function(num) {
     //
     //
     // another: SCENE 1 SETUP   
-      console.log("JT_tracer0-Scene file: CScene.initScene(",num,") NOT YET IMPLEMENTED.");
-      this.initScene(0); // use default scene
+      //console.log("JT_tracer0-Scene file: CScene.initScene(",num,") NOT YET IMPLEMENTED.");
+      //this.initScene(0); // use default scene
 
-      /*// create our list of CGeom shapes that fill our 3D scene:
+      // create our list of CGeom shapes that fill our 3D scene:
       //---Ground Plane-----
       // draw this in world-space; no transforms!
       this.item.push(new CGeom(RT_GNDPLANE));   // Append gnd-plane to item[] array
@@ -415,7 +415,31 @@ CScene.prototype.initScene = function(num) {
       this.item[iNow].rayTranslate(1.2,-1.0, 1.0);  // move rightwards (+x),
       // and toward camera (-y) enough to stay clear of disks, and up by 1 to
       // make this radius==1 sphere rest on gnd-plane.
-    //*/
+
+      //-----Sphere 2-----
+      this.item.push(new CGeom(RT_SPHERE));       // Append sphere to item[] &
+      iNow = this.item.length -1;                 // get its array index.
+      // Initially leave sphere at the origin. Once you see it, then
+      // move it to a more-sensible location:
+      this.item[iNow].setIdent();                   // start in world coord axes
+      this.item[iNow].rayTranslate(3.7,-1.0, 1.0);  // move rightwards (+x),
+      this.item[iNow].rayScale(0.5, 0.5, 1.0);
+      // and toward camera (-y) enough to stay clear of disks, and up by 1 to
+      // make this radius==1 sphere rest on gnd-plane.
+
+      //-----Sphere 3-----
+      this.item.push(new CGeom(RT_SPHERE));       // Append sphere to item[] &
+      iNow = this.item.length -1;                 // get its array index.
+      // Initially leave sphere at the origin. Once you see it, then
+      // move it to a more-sensible location:
+      this.item[iNow].setIdent();                   // start in world coord axes
+      this.item[iNow].rayTranslate(2.7,-3.0, 1.0);  // move rightwards (+x),
+      this.item[iNow].rayScale(1.0, 1.0, 0.5);
+      this.item[iNow].rayRotate(Math.PI/3, 0,0,1);    // z-axis rotate 60deg.
+      // and toward camera (-y) enough to stay clear of disks, and up by 1 to
+      // make this radius==1 sphere rest on gnd-plane.
+
+    //
     //
       break;
     case 2:

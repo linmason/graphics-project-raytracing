@@ -106,7 +106,7 @@ function main() {
 
   gui.init();                   // Register all Mouse & Keyboard Event-handlers
                                 // (see JT_GUIbox-Lib.js )
-  g_myScene.initScene(1);       // initialize our ray-tracer (to default scene)
+  g_myScene.initScene(0);       // initialize our ray-tracer (to default scene)
   // Initialize each of our 'vboBox' objects: 
   preView.init(gl);		// VBO + shaders + uniforms + attribs for WebGL preview
   rayView.init(gl);		//  "		"		" to display ray-traced on-screen result.
