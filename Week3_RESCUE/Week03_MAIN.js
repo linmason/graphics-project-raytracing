@@ -367,7 +367,7 @@ function drawAll() {
   						gl.drawingBufferHeight);
 	preView.switchToMe();  // Set WebGL to render from this VBObox.
 	preView.adjust();		  // Send new values for uniforms to the GPU, and
-	preView.draw();			  // draw our VBO's contents using our shaders.
+	preView.draw(g_SceneNum);			  // draw our VBO's contents using our shaders.
 
   // Draw in the RIGHT viewport:
   //------------------------------------------
@@ -451,7 +451,7 @@ function onJitterButton() {
 function onSceneButton() {
 //=============================================================================
 	//console.log('ON-SCENE BUTTON!');
-	if(g_SceneNum < 0 || g_SceneNum >= G_SCENE_MAX) g_SceneNum = 0;
+	if(g_SceneNum < 0 || g_SceneNum >= G_SCENE_MAX - 1) g_SceneNum = 0;
 	else g_SceneNum = g_SceneNum +1;
 
 	document.getElementById('SceneReport').innerHTML =
