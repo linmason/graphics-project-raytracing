@@ -314,6 +314,9 @@ CScene.prototype.initScene = function(num) {
   // Empty the 'item[] array -- discard all leftover CGeom objects it may hold.
   this.item.length = 0;       
   var iNow = 0;         // index of the last CGeom object put into item[] array
+
+  this.matter = [];
+  this.lamp = [];
   
   // set up new scene:
   switch(num) {
@@ -375,10 +378,10 @@ CScene.prototype.initScene = function(num) {
       this.item[iNow].matlIndex = 1;  // set material index in matter[] MASON
       
       //-----Material 1----- MASON !!!!! need to add matlindex and Mateirals to other scense!!!
-      this.matter.push(new CMatl(2));
+      this.matter.push(new CMatl(15));
 
       //-----Material 2----- MASON
-      this.matter.push(new CMatl(2));
+      this.matter.push(new CMatl(1));
 
       //-----Light 1----- MASON
       var ia = vec4.fromValues(1.0, 1.0, 1.0, 0.0);
@@ -414,7 +417,7 @@ CScene.prototype.initScene = function(num) {
                                                 // use default colors.
                                                 // no transforms needed.
       this.item[iNow].matlIndex = 0;  // set material index in matter[] MASON
-
+      /*
       //-----Disk 1------           
       this.item.push(new CGeom(RT_DISK));         // Append 2D disk to item[] &
       iNow = this.item.length -1;                 // get its array index.
@@ -449,7 +452,7 @@ CScene.prototype.initScene = function(num) {
       this.item[iNow].rayRotate(Math.PI/3, 0,0,1);    // z-axis rotate 60deg.
 
       this.item[iNow].matlIndex = 0;  // set material index in matter[] MASON
-
+*/
       //-----Sphere 1-----
       this.item.push(new CGeom(RT_SPHERE));       // Append sphere to item[] &
       iNow = this.item.length -1;                 // get its array index.
@@ -490,14 +493,14 @@ CScene.prototype.initScene = function(num) {
       // make this radius==1 sphere rest on gnd-plane.
 
       //-----Material 1----- MASON !!!!! need to add matlindex and Mateirals to other scense!!!
-      this.matter.push(new CMatl(3));
+      this.matter.push(new CMatl(15));
 
       //-----Material 2----- MASON
-      this.matter.push(new CMatl(4));
+      this.matter.push(new CMatl(1));
       //-----Material 2----- MASON
-      this.matter.push(new CMatl(5));
+      this.matter.push(new CMatl(2));
       //-----Material 2----- MASON
-      this.matter.push(new CMatl(6));
+      this.matter.push(new CMatl(3));
 
       //-----Light 1----- MASON
       var ia = vec4.fromValues(1.0, 1.0, 1.0, 0.0);
@@ -507,9 +510,9 @@ CScene.prototype.initScene = function(num) {
       this.lamp.push(new CLight(g_light1Pos, ia, id, is));
 
       //-----Light 2----- MASON
-      var ia = vec4.fromValues(1.0, 0.0, 1.0, 0.0);
-      var id = vec4.fromValues(1.0, 0.0, 1.0, 0.0);
-      var is = vec4.fromValues(1.0, 0.0, 1.0, 0.0);
+      var ia = vec4.fromValues(1.0, 1.0, 1.0, 0.0);
+      var id = vec4.fromValues(1.0, 1.0, 1.0, 0.0);
+      var is = vec4.fromValues(1.0, 1.0, 1.0, 0.0);
       //this.lamp.push(new CLight(gui.camEyePt, ia, id, is));
       //this.lamp.push(new CLight(vec4.fromValues(5.0, 0.0, 6.0, 1.0), ia, id, is));
       this.lamp.push(new CLight(g_light1Pos, ia, id, is));
@@ -531,7 +534,7 @@ CScene.prototype.initScene = function(num) {
                                                 // use default colors.
                                                 // no transforms needed.
       this.item[iNow].matlIndex = 0;  // set material index in matter[] MASON
-
+/*
       //-----Disk 1------           
       this.item.push(new CGeom(RT_DISK));         // Append 2D disk to item[] &
       iNow = this.item.length -1;                 // get its array index.
@@ -564,7 +567,7 @@ CScene.prototype.initScene = function(num) {
       this.item[iNow].rayRotate(0.75*Math.PI, 1,0,0); // rot 135 on x axis to face us
       this.item[iNow].rayRotate(Math.PI/3, 0,0,1);    // z-axis rotate 60deg.
       this.item[iNow].matlIndex = 0;  // set material index in matter[] MASON
-
+*/
       //-----Sphere 1-----
       this.item.push(new CGeom(RT_SPHERE));       // Append sphere to item[] &
       iNow = this.item.length -1;                 // get its array index.
@@ -603,14 +606,14 @@ CScene.prototype.initScene = function(num) {
       this.item[iNow].matlIndex = 3;  // set material index in matter[] MASON
 
       //-----Material 1----- MASON !!!!! need to add matlindex and Mateirals to other scense!!!
-      this.matter.push(new CMatl(3));
+      this.matter.push(new CMatl(15));
 
       //-----Material 2----- MASON
-      this.matter.push(new CMatl(7));
+      this.matter.push(new CMatl(9));
       //-----Material 2----- MASON
       this.matter.push(new CMatl(8));
       //-----Material 2----- MASON
-      this.matter.push(new CMatl(9));
+      this.matter.push(new CMatl(6));
 
       //-----Light 1----- MASON
       var ia = vec4.fromValues(1.0, 1.0, 1.0, 0.0);
@@ -620,9 +623,9 @@ CScene.prototype.initScene = function(num) {
       this.lamp.push(new CLight(g_light1Pos, ia, id, is));
 
       //-----Light 2----- MASON
-      var ia = vec4.fromValues(1.0, 0.0, 1.0, 0.0);
-      var id = vec4.fromValues(1.0, 0.0, 1.0, 0.0);
-      var is = vec4.fromValues(1.0, 0.0, 1.0, 0.0);
+      var ia = vec4.fromValues(1.0, 1.0, 1.0, 0.0);
+      var id = vec4.fromValues(1.0, 1.0, 1.0, 0.0);
+      var is = vec4.fromValues(1.0, 1.0, 1.0, 0.0);
       //this.lamp.push(new CLight(gui.camEyePt, ia, id, is));
       //this.lamp.push(new CLight(vec4.fromValues(5.0, 0.0, 6.0, 1.0), ia, id, is));
       this.lamp.push(new CLight(g_light1Pos, ia, id, is));
@@ -697,6 +700,7 @@ CScene.prototype.findShade = function(myHit) {
       // add light for ith light source
       //console.log(this.matter[myHit.hitGeom.matlIndex]);
       var myMat = this.matter[myHit.hitGeom.matlIndex];
+      //if (myHit.hitGeom.matlIndex == 2) {console.log(this.matter)}
       //console.log(light_colr);
       vec4.add(light_colr, light_colr, myMat.K_emit);
       //console.log(light_colr);

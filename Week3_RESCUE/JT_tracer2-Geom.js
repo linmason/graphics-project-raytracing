@@ -432,11 +432,16 @@ CGeom.prototype.traceSphere = function(inRay, myHit) {
   var L2 = vec3.dot(r2s,r2s);   // NOTE: vec3.dot() IGNORES the 'w' values when 
                                 //  vec4 arguments.  !Good! I like glMatrix...
   // if L2 <=1.0, ray starts AT or INSIDE the unit sphere surface (!). 
+  
+  // !!!MASON removed bc it was not allowing to make new rays
+  /*
   if(L2 <= 1.0) { // report error and quit.  LATER we can use this case to
                   // handle rays through transparent spheres.
     console.log("CGeom.traceSphere() ERROR! rayT origin at or inside sphere!\n\n");
     return;       // HINT: see comments at end of this function.
   }
+*/
+
   // We now know L2 > 1.0; ray starts OUTSIDE the sphere.
   // Now consider the path of rayT in model coords. It will either:
   //  MISS the sphere entirely, or HIT the sphere at 2 points. Lets name the

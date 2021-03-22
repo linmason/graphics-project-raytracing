@@ -76,8 +76,8 @@ var g_isJitter = 0;     // ==1 for jitter, ==0 for no jitter.
 
 var g_light1Enabled = true;
 var g_light2Enabled = true;
-var g_light1Pos = vec4.fromValues(0.0, 0.0, 6.0, 1.0);
-var g_light2Pos = vec4.fromValues(5.0, 0.0, 6.0, 1.0);
+var g_light1Pos = vec4.fromValues(-3.0, -4.0, 6.0, 1.0);
+var g_light2Pos = vec4.fromValues(3.0, -4.0, 6.0, 1.0);
 
 //--END---GLOBAL VARIABLES------------------------------------------------------
 
@@ -89,6 +89,12 @@ function main() {
 //  test_glMatrix();	// make sure that the fast vector/matrix library we use
   										// is available and working properly.
 
+  document.getElementById('light1x').value = g_light1Pos[0];
+  document.getElementById('light1y').value = g_light1Pos[1];
+  document.getElementById('light1z').value = g_light1Pos[2];
+  document.getElementById('light2x').value = g_light2Pos[0];
+  document.getElementById('light2y').value = g_light2Pos[1];
+  document.getElementById('light2z').value = g_light2Pos[2];
   // Retrieve the HTML-5 <canvas> element where webGL will draw our pictures:
   g_canvasID = document.getElementById('webgl');	
 
