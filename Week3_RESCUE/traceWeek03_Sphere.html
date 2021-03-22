@@ -27,6 +27,29 @@
 	    <span id='SceneReport'> Show Scene Number 0 </span> 
 
 	<br>
+		Light1:
+		<button id="light1Button" type="button" onclick="onLight1Button()" >On</button>
+		Position:
+		x:
+		<input type="number" id="light1x" style="width:30px;" min="-5" max="5">
+		y:
+		<input type="number" id="light1y" style="width:30px;" min="-5" max="5">
+		z:
+		<input type="number" id="light1z" style="width:30px;" min="5" max="10">
+		<button id="light1PosButton" type="button" onclick="onLight1PosButton()" >Update</button>
+
+		Light2:
+		<button id="light2Button" type="button" onclick="onLight2Button()" >On</button>
+		Position:
+		x:
+		<input type="number" id="light2x" style="width:30px;" min="-5" max="5">
+		y:
+		<input type="number" id="light2y" style="width:30px;" min="-5" max="5">
+		z:
+		<input type="number" id="light2z" style="width:30px;" min="5" max="10">
+		<button id="light1PosButton" type="button" onclick="onLight2PosButton()" >Update</button>
+
+	<br>
 	    Mouse Drag: Aims the camera (turns left,right,up,down)
 	<br>
 	    W/S; A/D keys: move camera forward/backwards; strafe left/right. Q/E: strafe down/up.

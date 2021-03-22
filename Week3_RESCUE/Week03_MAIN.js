@@ -74,6 +74,11 @@ var g_AAcode = 1;			// Antialiasing setting: 1 == NO antialiasing at all.
 var G_AA_MAX = 4;				// highest super-sampling number allowed. 
 var g_isJitter = 0;     // ==1 for jitter, ==0 for no jitter.
 
+var g_light1Enabled = true;
+var g_light2Enabled = true;
+var g_light1Pos = vec4.fromValues(0.0, 0.0, 6.0, 1.0);
+var g_light2Pos = vec4.fromValues(5.0, 0.0, 6.0, 1.0);
+
 //--END---GLOBAL VARIABLES------------------------------------------------------
 
 function main() {
@@ -466,6 +471,62 @@ function onSceneButton() {
   rayView.switchToMe(); // be sure OUR VBO & shaders are in use, then
   rayView.reload();     // re-transfer VBO contents and texture-map contents
   drawAll();
+}
+
+function onLight1Button() {
+  if (g_light1Enabled) {
+    g_light1Enabled = false;
+    document.getElementById('light1Button').innerHTML = "Off";
+  }
+  else {
+    g_light1Enabled = true;
+    document.getElementById('light1Button').innerHTML = "On";
+  }
+
+  g_myScene.makeRayTracedImage(); // (near end of traceSupplement.js)     
+  rayView.switchToMe(); // be sure OUR VBO & shaders are in use, then
+  rayView.reload();     // re-transfer VBO contents and texture-map contents
+  drawAll();      // redraw BOTH viewports onscreen.
+}
+
+function onLight2Button() {
+  if (g_light2Enabled) {
+    g_light2Enabled = false;
+    document.getElementById('light2Button').innerHTML = "Off";
+  }
+  else {
+    g_light2Enabled = true;
+    document.getElementById('light2Button').innerHTML = "On";
+  }
+
+  g_myScene.makeRayTracedImage(); // (near end of traceSupplement.js)     
+  rayView.switchToMe(); // be sure OUR VBO & shaders are in use, then
+  rayView.reload();     // re-transfer VBO contents and texture-map contents
+  drawAll();      // redraw BOTH viewports onscreen.
+}
+
+function onLight1PosButton() {
+  var x = document.getElementById('light1x').value;
+  var y = document.getElementById('light1y').value;
+  var z = document.getElementById('light1z').value;
+  g_light1Pos = vec4.fromValues(x, y, z, 1.0);
+
+  g_myScene.makeRayTracedImage(); // (near end of traceSupplement.js)     
+  rayView.switchToMe(); // be sure OUR VBO & shaders are in use, then
+  rayView.reload();     // re-transfer VBO contents and texture-map contents
+  drawAll();      // redraw BOTH viewports onscreen.
+}
+
+function onLight2PosButton() {
+  var x = document.getElementById('light2x').value;
+  var y = document.getElementById('light2y').value;
+  var z = document.getElementById('light2z').value;
+  g_light2Pos = vec4.fromValues(x, y, z, 1.0);
+
+  g_myScene.makeRayTracedImage(); // (near end of traceSupplement.js)     
+  rayView.switchToMe(); // be sure OUR VBO & shaders are in use, then
+  rayView.reload();     // re-transfer VBO contents and texture-map contents
+  drawAll();      // redraw BOTH viewports onscreen.
 }
 
 function onBrowserResize() {

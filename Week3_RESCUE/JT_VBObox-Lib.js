@@ -887,6 +887,7 @@ VBObox0.prototype.draw = function(sceneNum) {
   mat4.copy(tmp, this.mvpMat);    // SAVE current value (needs push-down stack!)
   switch(sceneNum) {
     case 0:
+      /*
       // 1) -----------------copy transforms for Disk 1 in CScene.initScene(0) :
       mat4.translate(this.mvpMat, this.mvpMat, vec3.fromValues(1.0, 1.0, 1.3));
       mat4.rotate(this.mvpMat, this.mvpMat, 0.25*Math.PI, vec3.fromValues(1,0,0));
@@ -916,7 +917,7 @@ VBObox0.prototype.draw = function(sceneNum) {
                       //          gl.TRIANGLES, gl.TRIANGLE_STRIP, ...
       								this.bgnDisk, 	// location of 1st vertex to draw;
                       this.bgnSphere - this.bgnDisk);  // How many vertices to draw
-
+*/
       // 3)--------------------copy transforms for Sphere 1 in CScene.initScene(0)
       mat4.copy(this.mvpMat, tmp); // RESTORE current value (needs push-down stack!)
       mat4.translate(this.mvpMat, this.mvpMat, vec3.fromValues(1.2, -1.0, 1.0));

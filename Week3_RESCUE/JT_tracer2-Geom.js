@@ -540,7 +540,8 @@ CGeom.prototype.traceSphere = function(inRay, myHit) {
   // Now find surface normal: 
   // in model space we know it's always +z,
   // but we need to TRANSFORM the normal to world-space, & re-normalize it.
-  vec4.transformMat4(myHit.surfNorm, vec4.fromValues(0,0,1,0), this.normal2world);
+  //vec4.transformMat4(myHit.surfNorm, vec4.fromValues(0,0,1,0), this.normal2world);
+  vec4.transformMat4(myHit.surfNorm, myHit.modelHitPt, this.normal2world);
   vec4.normalize(myHit.surfNorm, myHit.surfNorm);
   // TEMPORARY: sphere color-setting
   myHit.hitNum = 1;   // in CScene.makeRayTracedImage, use 'this.gapColor'
@@ -801,18 +802,24 @@ function CLight(pos, ia, id, is) {
   this.ia = ia;
   this.id = id;
   this.is = is;
-  this.isOn = true;
+  this.enabled = true;
 }
 
 CLight.prototype.setPos = function(pos) { 
   this.pos = pos;
 }
 
+CLight.prototype.setColr = function(ia, id, is) { 
+  this.ia = ia;
+  this.id = id;
+  this.is = is;
+}
+
 CLight.prototype.enable = function() { 
-  this.isOn = true;
+  this.enabled = true;
 }
 
 CLight.prototype.disable = function() { 
-  this.isOn = false;
+  this.enabled = false;
 }
 

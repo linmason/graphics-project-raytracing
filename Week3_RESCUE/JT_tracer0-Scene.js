@@ -326,7 +326,7 @@ CScene.prototype.initScene = function(num) {
                                                 // use default colors.
                                                 // no transforms needed.
       this.item[iNow].matlIndex = 0;  // set material index in matter[] MASON
-
+      /*
       //-----Disk 1------           
       this.item.push(new CGeom(RT_DISK));         // Append 2D disk to item[] &
       iNow = this.item.length -1;                 // get its array index.
@@ -361,7 +361,7 @@ CScene.prototype.initScene = function(num) {
       this.item[iNow].rayRotate(Math.PI/3, 0,0,1);    // z-axis rotate 60deg.
 
       this.item[iNow].matlIndex = 0;  // set material index in matter[] MASON
-
+*/
       //-----Sphere 1-----
       this.item.push(new CGeom(RT_SPHERE));       // Append sphere to item[] &
       iNow = this.item.length -1;                 // get its array index.
@@ -372,7 +372,7 @@ CScene.prototype.initScene = function(num) {
       // and toward camera (-y) enough to stay clear of disks, and up by 1 to
       // make this radius==1 sphere rest on gnd-plane.
 
-      this.item[iNow].matlIndex = 0;  // set material index in matter[] MASON
+      this.item[iNow].matlIndex = 1;  // set material index in matter[] MASON
       
       //-----Material 1----- MASON !!!!! need to add matlindex and Mateirals to other scense!!!
       this.matter.push(new CMatl(2));
@@ -381,7 +381,19 @@ CScene.prototype.initScene = function(num) {
       this.matter.push(new CMatl(2));
 
       //-----Light 1----- MASON
-      this.lamp.push(new CLight(vec4.fromValues(0.0, 0.0, 6.0, 1.0), 0.5, 0.5, 0.5));
+      var ia = vec4.fromValues(1.0, 1.0, 1.0, 0.0);
+      var id = vec4.fromValues(1.0, 1.0, 1.0, 0.0);
+      var is = vec4.fromValues(1.0, 1.0, 1.0, 0.0);
+      //this.lamp.push(new CLight(vec4.fromValues(0.0, 0.0, 6.0, 1.0), ia, id, is));
+      this.lamp.push(new CLight(g_light1Pos, ia, id, is));
+
+      //-----Light 2----- MASON
+      var ia = vec4.fromValues(1.0, 1.0, 1.0, 0.0);
+      var id = vec4.fromValues(1.0, 1.0, 1.0, 0.0);
+      var is = vec4.fromValues(1.0, 1.0, 1.0, 0.0);
+      //this.lamp.push(new CLight(gui.camEyePt, ia, id, is));
+      //this.lamp.push(new CLight(vec4.fromValues(5.0, 0.0, 6.0, 1.0), ia, id, is));
+      this.lamp.push(new CLight(g_light2Pos, ia, id, is));
 
       // additional SCENE 0 SETUP   
       //
@@ -401,6 +413,8 @@ CScene.prototype.initScene = function(num) {
       iNow = this.item.length -1;               // get its array index.
                                                 // use default colors.
                                                 // no transforms needed.
+      this.item[iNow].matlIndex = 0;  // set material index in matter[] MASON
+
       //-----Disk 1------           
       this.item.push(new CGeom(RT_DISK));         // Append 2D disk to item[] &
       iNow = this.item.length -1;                 // get its array index.
@@ -416,6 +430,8 @@ CScene.prototype.initScene = function(num) {
                                                     // RIGHT, BACK, & UP.
       this.item[iNow].rayRotate(0.25*Math.PI, 1,0,0); // rot 45deg on x axis to face us
       this.item[iNow].rayRotate(0.25*Math.PI, 0,0,1); // z-axis rotate 45deg.
+
+      this.item[iNow].matlIndex = 0;  // set material index in matter[] MASON
       
       //-----Disk 2------ 
       this.item.push(new CGeom(RT_DISK));         // Append 2D disk to item[] &
@@ -432,6 +448,8 @@ CScene.prototype.initScene = function(num) {
       this.item[iNow].rayRotate(0.75*Math.PI, 1,0,0); // rot 135 on x axis to face us
       this.item[iNow].rayRotate(Math.PI/3, 0,0,1);    // z-axis rotate 60deg.
 
+      this.item[iNow].matlIndex = 0;  // set material index in matter[] MASON
+
       //-----Sphere 1-----
       this.item.push(new CGeom(RT_SPHERE));       // Append sphere to item[] &
       iNow = this.item.length -1;                 // get its array index.
@@ -439,6 +457,8 @@ CScene.prototype.initScene = function(num) {
       // move it to a more-sensible location:
       this.item[iNow].setIdent();                   // start in world coord axes
       this.item[iNow].rayTranslate(1.2,-1.0, 1.0);  // move rightwards (+x),
+
+      this.item[iNow].matlIndex = 1;  // set material index in matter[] MASON
       // and toward camera (-y) enough to stay clear of disks, and up by 1 to
       // make this radius==1 sphere rest on gnd-plane.
 
@@ -450,6 +470,8 @@ CScene.prototype.initScene = function(num) {
       this.item[iNow].setIdent();                   // start in world coord axes
       this.item[iNow].rayTranslate(3.7,-1.0, 1.0);  // move rightwards (+x),
       this.item[iNow].rayScale(0.5, 0.5, 1.0);
+
+      this.item[iNow].matlIndex = 2;  // set material index in matter[] MASON
       // and toward camera (-y) enough to stay clear of disks, and up by 1 to
       // make this radius==1 sphere rest on gnd-plane.
 
@@ -462,9 +484,35 @@ CScene.prototype.initScene = function(num) {
       this.item[iNow].rayTranslate(2.7,-3.0, 1.0);  // move rightwards (+x),
       this.item[iNow].rayRotate(Math.PI/3, 0,0,1);    // z-axis rotate 60deg.
       this.item[iNow].rayScale(1.0, 1.0, 0.5);
+
+      this.item[iNow].matlIndex = 3;  // set material index in matter[] MASON
       // and toward camera (-y) enough to stay clear of disks, and up by 1 to
       // make this radius==1 sphere rest on gnd-plane.
 
+      //-----Material 1----- MASON !!!!! need to add matlindex and Mateirals to other scense!!!
+      this.matter.push(new CMatl(3));
+
+      //-----Material 2----- MASON
+      this.matter.push(new CMatl(4));
+      //-----Material 2----- MASON
+      this.matter.push(new CMatl(5));
+      //-----Material 2----- MASON
+      this.matter.push(new CMatl(6));
+
+      //-----Light 1----- MASON
+      var ia = vec4.fromValues(1.0, 1.0, 1.0, 0.0);
+      var id = vec4.fromValues(1.0, 1.0, 1.0, 0.0);
+      var is = vec4.fromValues(1.0, 1.0, 1.0, 0.0);
+      //this.lamp.push(new CLight(vec4.fromValues(0.0, 0.0, 6.0, 1.0), ia, id, is));
+      this.lamp.push(new CLight(g_light1Pos, ia, id, is));
+
+      //-----Light 2----- MASON
+      var ia = vec4.fromValues(1.0, 0.0, 1.0, 0.0);
+      var id = vec4.fromValues(1.0, 0.0, 1.0, 0.0);
+      var is = vec4.fromValues(1.0, 0.0, 1.0, 0.0);
+      //this.lamp.push(new CLight(gui.camEyePt, ia, id, is));
+      //this.lamp.push(new CLight(vec4.fromValues(5.0, 0.0, 6.0, 1.0), ia, id, is));
+      this.lamp.push(new CLight(g_light1Pos, ia, id, is));
     //
     //
       break;
@@ -482,6 +530,8 @@ CScene.prototype.initScene = function(num) {
       iNow = this.item.length -1;               // get its array index.
                                                 // use default colors.
                                                 // no transforms needed.
+      this.item[iNow].matlIndex = 0;  // set material index in matter[] MASON
+
       //-----Disk 1------           
       this.item.push(new CGeom(RT_DISK));         // Append 2D disk to item[] &
       iNow = this.item.length -1;                 // get its array index.
@@ -497,6 +547,7 @@ CScene.prototype.initScene = function(num) {
                                                     // RIGHT, BACK, & UP.
       this.item[iNow].rayRotate(0.25*Math.PI, 1,0,0); // rot 45deg on x axis to face us
       this.item[iNow].rayRotate(0.25*Math.PI, 0,0,1); // z-axis rotate 45deg.
+      this.item[iNow].matlIndex = 0;  // set material index in matter[] MASON
       
       //-----Disk 2------ 
       this.item.push(new CGeom(RT_DISK));         // Append 2D disk to item[] &
@@ -512,6 +563,7 @@ CScene.prototype.initScene = function(num) {
                                                       // LEFT, BACK, & UP.
       this.item[iNow].rayRotate(0.75*Math.PI, 1,0,0); // rot 135 on x axis to face us
       this.item[iNow].rayRotate(Math.PI/3, 0,0,1);    // z-axis rotate 60deg.
+      this.item[iNow].matlIndex = 0;  // set material index in matter[] MASON
 
       //-----Sphere 1-----
       this.item.push(new CGeom(RT_SPHERE));       // Append sphere to item[] &
@@ -523,6 +575,7 @@ CScene.prototype.initScene = function(num) {
       this.item[iNow].rayScale(3.0, 3.0, 0.5);
       // and toward camera (-y) enough to stay clear of disks, and up by 1 to
       // make this radius==1 sphere rest on gnd-plane.
+      this.item[iNow].matlIndex = 1;  // set material index in matter[] MASON
 
       //-----Sphere 2-----
       this.item.push(new CGeom(RT_SPHERE));       // Append sphere to item[] &
@@ -535,6 +588,7 @@ CScene.prototype.initScene = function(num) {
       this.item[iNow].rayScale(0.5, 0.8, 1.0);
       // and toward camera (-y) enough to stay clear of disks, and up by 1 to
       // make this radius==1 sphere rest on gnd-plane.
+      this.item[iNow].matlIndex = 2;  // set material index in matter[] MASON
 
       //-----Sphere 3-----
       this.item.push(new CGeom(RT_SPHERE));       // Append sphere to item[] &
@@ -546,7 +600,32 @@ CScene.prototype.initScene = function(num) {
       this.item[iNow].rayRotate(Math.PI/4, 0,0,1);    // z-axis rotate
       // and toward camera (-y) enough to stay clear of disks, and up by 1 to
       // make this radius==1 sphere rest on gnd-plane.
+      this.item[iNow].matlIndex = 3;  // set material index in matter[] MASON
 
+      //-----Material 1----- MASON !!!!! need to add matlindex and Mateirals to other scense!!!
+      this.matter.push(new CMatl(3));
+
+      //-----Material 2----- MASON
+      this.matter.push(new CMatl(7));
+      //-----Material 2----- MASON
+      this.matter.push(new CMatl(8));
+      //-----Material 2----- MASON
+      this.matter.push(new CMatl(9));
+
+      //-----Light 1----- MASON
+      var ia = vec4.fromValues(1.0, 1.0, 1.0, 0.0);
+      var id = vec4.fromValues(1.0, 1.0, 1.0, 0.0);
+      var is = vec4.fromValues(1.0, 1.0, 1.0, 0.0);
+      //this.lamp.push(new CLight(vec4.fromValues(0.0, 0.0, 6.0, 1.0), ia, id, is));
+      this.lamp.push(new CLight(g_light1Pos, ia, id, is));
+
+      //-----Light 2----- MASON
+      var ia = vec4.fromValues(1.0, 0.0, 1.0, 0.0);
+      var id = vec4.fromValues(1.0, 0.0, 1.0, 0.0);
+      var is = vec4.fromValues(1.0, 0.0, 1.0, 0.0);
+      //this.lamp.push(new CLight(gui.camEyePt, ia, id, is));
+      //this.lamp.push(new CLight(vec4.fromValues(5.0, 0.0, 6.0, 1.0), ia, id, is));
+      this.lamp.push(new CLight(g_light1Pos, ia, id, is));
 
     //
       break;
@@ -580,48 +659,79 @@ CScene.prototype.findShade = function(myHit) {
   // Call findshade to get color at point and use for phong shading
 
   var lightRay = new CRay();
-  var light_colr = vec4.create();
+  var light_colr = vec4.fromValues(0.0, 0.0, 0.0, 0.0);
+  // if doesn't hit, return sky color
+  if (myHit.hitGeom == -1) {
+    light_colr = vec4.fromValues(0.3, 0.8, 1.0, 1.0);
+    vec4.copy(myHit.colr, light_colr);
+    return;
+  }
+
+  // update light enabled and position
+  if (g_light1Enabled) {this.lamp[0].enable();}
+  else {this.lamp[0].disable();}
+  if (g_light2Enabled) {this.lamp[1].enable();}
+  else {this.lamp[1].disable();}
+  this.lamp[0].pos = g_light1Pos;
+  this.lamp[1].pos = g_light2Pos;
+
   for (var i=0; i < this.lamp.length; i++) {
-    if (this.lamp[i].isOn) {
-      // if doesn't hit, return sky color
-      if (myHit.hitGeom == -1) {
-        light_colr = vec4.fromValues(0.3, 0.8, 1.0, 1.0);
-        break;
-      }
+    if (this.lamp[i].enabled) {
 
       // Find light vec
-      lightRay.orig = this.lamp[i].pos;
+      vec4.copy(lightRay.orig, myHit.hitPt);
       //console.log(myHit.hitPt[0]);
       vec4.subtract(lightRay.dir, this.lamp[i].pos, myHit.hitPt);
       vec4.normalize(lightRay.dir, lightRay.dir);
+      // move orig away from model
+      var temp = vec4.create();
+      vec4.add(lightRay.orig, lightRay.orig, vec4.scale(temp, lightRay.dir, 100 * this.RAY_EPSILON));
 
       // trace light vec to check notShadow
       var newMyHit = new CHit();
       newMyHit.init();
       var shadow = false;
       this.traceRay(lightRay, newMyHit);
-      if (newMyHit.hitGeom != -1) {Shadow = true;}
+      if (newMyHit.hitGeom != -1) {shadow = true;}
 
       // add light for ith light source
       //console.log(this.matter[myHit.hitGeom.matlIndex]);
       var myMat = this.matter[myHit.hitGeom.matlIndex];
-      light_colr += myMat.K_emit + this.lamp[i].ia * myMat.K_ambi;
-      console.log(shadow);
+      //console.log(light_colr);
+      vec4.add(light_colr, light_colr, myMat.K_emit);
+      //console.log(light_colr);
+      vec4.add(light_colr, light_colr, vec4.multiply(temp, this.lamp[i].ia, myMat.K_ambi));
+      //console.log(light_colr);
+      //light_colr += myMat.K_emit + this.lamp[i].ia * myMat.K_ambi;
+      //console.log(myMat.K_emit);
+      //console.log(temp);
+      //console.log(myMat.K_ambi);
+      //console.log(light_colr);
+      //console.log(shadow);
       if (!shadow) {
-        var Nvec = vec3.fromValues(myHit.surfNorm[0], myHit.surfNorm[1], myHit.surfNorm[2]);
-        var Lvec = vec3.fromValues(lightRay.dir[0], lightRay.dir[2], lightRay.dir[2]);
-        var N_dot_L = vec3.dot(Nvec, Lvec);
+        var Nvec3 = vec3.fromValues(myHit.surfNorm[0], myHit.surfNorm[1], myHit.surfNorm[2]);
+        var Lvec3 = vec3.fromValues(lightRay.dir[0], lightRay.dir[2], lightRay.dir[2]);
+        var N_dot_L = vec3.dot(Nvec3, Lvec3);
 
         // Compute Refected and view vector, dot them
-        var Cvec = vec3.create();
-        vec3.scale(Cvec, Nvec, N_dot_L);
-        var Rvec = vec3.create();
-        vec3.subtract(Rvec, vec3.scale(Cvec, 2), Lvec);
-        R_dot_V = vec3.dot(Rvec, vec3.fromValues(myHit.viewN[0], myHit.viewN[1], myHit.viewN[2]));
+        var Cvec3 = vec3.create();
+        vec3.scale(Cvec3, Nvec3, N_dot_L);
+        //console.log(Cvec3);
+        var Rvec3 = vec3.create();
+        vec3.subtract(Rvec3, vec3.scale(temp, Cvec3, 2.0), Lvec3);
+        R_dot_V = vec3.dot(Rvec3, vec3.fromValues(myHit.viewN[0], myHit.viewN[1], myHit.viewN[2]));
 
         // Add color to overall colr
-        light_colr += this.lamp[i].id * myMat.K_diff * Math.max(0, N_dot_L);
-        light_colr += this.lamp[i].is * myMat.K_spec * Math.pow(Math.max(0, (R_dot_V)), myMat.K_shiny);
+        vec4.scale(temp, vec4.multiply(temp, this.lamp[i].id, myMat.K_diff), Math.max(0, N_dot_L));
+        vec4.add(light_colr, light_colr, temp);
+        //console.log(light_colr);
+        //light_colr += this.lamp[i].id * myMat.K_diff * Math.max(0, N_dot_L);
+        vec4.multiply(temp, this.lamp[i].is, myMat.K_spec);
+
+        vec4.scale(temp, temp, Math.pow(Math.max(0, (R_dot_V)), myMat.K_shiny));
+        vec4.add(light_colr, light_colr, temp);
+        //console.log(light_colr);
+        //light_colr += this.lamp[i].is * myMat.K_spec * Math.pow(Math.max(0, (R_dot_V)), myMat.K_shiny);
       }
 
     }
