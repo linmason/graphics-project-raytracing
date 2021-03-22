@@ -118,6 +118,11 @@ this.hitNum = -1; // SKY color
                                 // useful for Phong lighting, etc.)
     this.isEntering=true;       // true iff ray origin was OUTSIDE the hitGeom.
                                 //(example; transparency rays begin INSIDE).
+
+    // Save the shadow ray, transparency ray, reflection ray MASON
+    //this.lightRay = new CRay();
+    this.transRay = new CRay();
+    this.reflRay = new CRay();
                                 
     this.modelHitPt = vec4.create(); // the 'hit point' in model coordinates.
     // *WHY* have modelHitPt? to evaluate procedural textures & materials.
@@ -268,6 +273,11 @@ function CScene() {
                                     // (change it with setImgBuf() if needed)
   this.item = [];                   // this JavaScript array holds all the
                                     // CGeom objects of the  current scene.
+  this.matter = [];                   // this JavaScript array holds all the
+                                    // CMatl objects of the  current scene.
+  this.lamp = [];                   // this JavaScript array holds all the
+                                    // CLight objects of the  current scene.
+
 }
 
 CScene.prototype.setImgBuf = function(nuImg) {
@@ -315,6 +325,8 @@ CScene.prototype.initScene = function(num) {
       iNow = this.item.length -1;               // get its array index.
                                                 // use default colors.
                                                 // no transforms needed.
+      this.item[iNow].matlIndex = 0;  // set material index in matter[] MASON
+
       //-----Disk 1------           
       this.item.push(new CGeom(RT_DISK));         // Append 2D disk to item[] &
       iNow = this.item.length -1;                 // get its array index.
@@ -330,6 +342,8 @@ CScene.prototype.initScene = function(num) {
                                                     // RIGHT, BACK, & UP.
       this.item[iNow].rayRotate(0.25*Math.PI, 1,0,0); // rot 45deg on x axis to face us
       this.item[iNow].rayRotate(0.25*Math.PI, 0,0,1); // z-axis rotate 45deg.
+
+      this.item[iNow].matlIndex = 0;  // set material index in matter[] MASON
       
       //-----Disk 2------ 
       this.item.push(new CGeom(RT_DISK));         // Append 2D disk to item[] &
@@ -346,6 +360,8 @@ CScene.prototype.initScene = function(num) {
       this.item[iNow].rayRotate(0.75*Math.PI, 1,0,0); // rot 135 on x axis to face us
       this.item[iNow].rayRotate(Math.PI/3, 0,0,1);    // z-axis rotate 60deg.
 
+      this.item[iNow].matlIndex = 0;  // set material index in matter[] MASON
+
       //-----Sphere 1-----
       this.item.push(new CGeom(RT_SPHERE));       // Append sphere to item[] &
       iNow = this.item.length -1;                 // get its array index.
@@ -355,8 +371,18 @@ CScene.prototype.initScene = function(num) {
       this.item[iNow].rayTranslate(1.2,-1.0, 1.0);  // move rightwards (+x),
       // and toward camera (-y) enough to stay clear of disks, and up by 1 to
       // make this radius==1 sphere rest on gnd-plane.
-      //
-      //
+
+      this.item[iNow].matlIndex = 0;  // set material index in matter[] MASON
+      
+      //-----Material 1----- MASON !!!!! need to add matlindex and Mateirals to other scense!!!
+      this.matter.push(new CMatl(2));
+
+      //-----Material 2----- MASON
+      this.matter.push(new CMatl(2));
+
+      //-----Light 1----- MASON
+      this.lamp.push(new CLight(vec4.fromValues(0.0, 0.0, 6.0, 1.0), 0.5, 0.5, 0.5));
+
       // additional SCENE 0 SETUP   
       //
       //
@@ -553,16 +579,69 @@ CScene.prototype.findShade = function(myHit) {
   // Call traceRay to find CHit
   // Call findshade to get color at point and use for phong shading
 
-  // Find eyeRay color from myHit-----------------------------------------
+  var lightRay = new CRay();
+  var light_colr = vec4.create();
+  for (var i=0; i < this.lamp.length; i++) {
+    if (this.lamp[i].isOn) {
+      // if doesn't hit, return sky color
+      if (myHit.hitGeom == -1) {
+        light_colr = vec4.fromValues(0.3, 0.8, 1.0, 1.0);
+        break;
+      }
+
+      // Find light vec
+      lightRay.orig = this.lamp[i].pos;
+      //console.log(myHit.hitPt[0]);
+      vec4.subtract(lightRay.dir, this.lamp[i].pos, myHit.hitPt);
+      vec4.normalize(lightRay.dir, lightRay.dir);
+
+      // trace light vec to check notShadow
+      var newMyHit = new CHit();
+      newMyHit.init();
+      var shadow = false;
+      this.traceRay(lightRay, newMyHit);
+      if (newMyHit.hitGeom != -1) {Shadow = true;}
+
+      // add light for ith light source
+      //console.log(this.matter[myHit.hitGeom.matlIndex]);
+      var myMat = this.matter[myHit.hitGeom.matlIndex];
+      light_colr += myMat.K_emit + this.lamp[i].ia * myMat.K_ambi;
+      console.log(shadow);
+      if (!shadow) {
+        var Nvec = vec3.fromValues(myHit.surfNorm[0], myHit.surfNorm[1], myHit.surfNorm[2]);
+        var Lvec = vec3.fromValues(lightRay.dir[0], lightRay.dir[2], lightRay.dir[2]);
+        var N_dot_L = vec3.dot(Nvec, Lvec);
+
+        // Compute Refected and view vector, dot them
+        var Cvec = vec3.create();
+        vec3.scale(Cvec, Nvec, N_dot_L);
+        var Rvec = vec3.create();
+        vec3.subtract(Rvec, vec3.scale(Cvec, 2), Lvec);
+        R_dot_V = vec3.dot(Rvec, vec3.fromValues(myHit.viewN[0], myHit.viewN[1], myHit.viewN[2]));
+
+        // Add color to overall colr
+        light_colr += this.lamp[i].id * myMat.K_diff * Math.max(0, N_dot_L);
+        light_colr += this.lamp[i].is * myMat.K_spec * Math.pow(Math.max(0, (R_dot_V)), myMat.K_shiny);
+      }
+
+    }
+  }
+
+  //set color to myHit
+  vec4.copy(myHit.colr, light_colr);
+
+  /*// Find eyeRay color from myHit-----------------------------------------
+  //console.log(this.matter[myHit.hitGeom.matlIndex].K_shiny);
   if(myHit.hitNum==0) {  // use myGrid tracing to determine color
     vec4.copy(myHit.colr, myHit.hitGeom.gapColor);
   }
   else if (myHit.hitNum==1) {
-    vec4.copy(myHit.colr, myHit.hitGeom.lineColor);
+    //vec4.copy(myHit.colr, myHit.hitGeom.lineColor);
+    vec4.copy(myHit.colr, vec4.scale(myHit.hitGeom.lineColor, myHit.hitGeom.matlIndex / 13.0));
   }
   else { // if myHit.hitNum== -1)
     vec4.copy(myHit.colr, this.skyColor);
-  }
+  }*/
 
 }
 
