@@ -632,6 +632,169 @@ CScene.prototype.initScene = function(num) {
 
     //
       break;
+
+    case 3:
+    //
+    //
+    // another: SCENE 2 SETUP   
+      //console.log("JT_tracer0-Scene file: CScene.initScene(",num,") NOT YET IMPLEMENTED.");    //
+      //this.initScene(0); // use default scene
+
+      // create our list of CGeom shapes that fill our 3D scene:
+      //---Ground Plane-----
+      // draw this in world-space; no transforms!
+      this.item.push(new CGeom(RT_GNDPLANE));   // Append gnd-plane to item[] array
+      iNow = this.item.length -1;               // get its array index.
+                                                // use default colors.
+                                                // no transforms needed.
+      this.item[iNow].matlIndex = 0;  // set material index in matter[] MASON
+
+      //-----Sphere 1-----
+      this.item.push(new CGeom(RT_SPHERE));       // Append sphere to item[] &
+      iNow = this.item.length -1;                 // get its array index.
+      // Initially leave sphere at the origin. Once you see it, then
+      // move it to a more-sensible location:
+      this.item[iNow].setIdent();                   // start in world coord axes
+      this.item[iNow].rayTranslate(0.0,-1.0, 1.0);  // move rightwards (+x),
+      this.item[iNow].rayScale(3.0, 3.0, 0.5);
+      // and toward camera (-y) enough to stay clear of disks, and up by 1 to
+      // make this radius==1 sphere rest on gnd-plane.
+      this.item[iNow].matlIndex = 1;  // set material index in matter[] MASON
+
+      //-----Sphere 2-----
+      this.item.push(new CGeom(RT_SPHERE));       // Append sphere to item[] &
+      iNow = this.item.length -1;                 // get its array index.
+      // Initially leave sphere at the origin. Once you see it, then
+      // move it to a more-sensible location:
+      this.item[iNow].setIdent();                   // start in world coord axes
+      this.item[iNow].rayTranslate(0.2,-1.0, 2.0);  // move rightwards (+x),
+      this.item[iNow].rayRotate(Math.PI/6, 0,0,1);    // z-axis rotate
+      this.item[iNow].rayScale(2.0, 2.0, 0.5);
+      // and toward camera (-y) enough to stay clear of disks, and up by 1 to
+      // make this radius==1 sphere rest on gnd-plane.
+      this.item[iNow].matlIndex = 2;  // set material index in matter[] MASON
+
+      //-----Sphere 3-----
+      this.item.push(new CGeom(RT_SPHERE));       // Append sphere to item[] &
+      iNow = this.item.length -1;                 // get its array index.
+      // Initially leave sphere at the origin. Once you see it, then
+      // move it to a more-sensible location:
+      this.item[iNow].setIdent();                   // start in world coord axes
+      this.item[iNow].rayTranslate(0.7,-2.0, 3.0);  // move rightwards (+x),
+      this.item[iNow].rayRotate(Math.PI/4, 0,0,1);    // z-axis rotate
+      this.item[iNow].rayScale(1.0, 1.0, 0.5);
+      // and toward camera (-y) enough to stay clear of disks, and up by 1 to
+      // make this radius==1 sphere rest on gnd-plane.
+      this.item[iNow].matlIndex = 3;  // set material index in matter[] MASON
+
+      //-----Material 1----- MASON !!!!! need to add matlindex and Mateirals to other scense!!!
+      this.matter.push(new CMatl(15));
+
+      //-----Material 2----- MASON
+      this.matter.push(new CMatl(19));
+      //-----Material 2----- MASON
+      this.matter.push(new CMatl(20));
+      //-----Material 2----- MASON
+      this.matter.push(new CMatl(22));
+
+      //-----Light 1----- MASON
+      var ia = vec4.fromValues(1.0, 1.0, 1.0, 0.0);
+      var id = vec4.fromValues(1.0, 1.0, 1.0, 0.0);
+      var is = vec4.fromValues(1.0, 1.0, 1.0, 0.0);
+      //this.lamp.push(new CLight(vec4.fromValues(0.0, 0.0, 6.0, 1.0), ia, id, is));
+      this.lamp.push(new CLight(g_light1Pos, ia, id, is));
+
+      //-----Light 2----- MASON
+      var ia = vec4.fromValues(1.0, 1.0, 1.0, 0.0);
+      var id = vec4.fromValues(1.0, 1.0, 1.0, 0.0);
+      var is = vec4.fromValues(1.0, 1.0, 1.0, 0.0);
+      //this.lamp.push(new CLight(gui.camEyePt, ia, id, is));
+      //this.lamp.push(new CLight(vec4.fromValues(5.0, 0.0, 6.0, 1.0), ia, id, is));
+      this.lamp.push(new CLight(g_light1Pos, ia, id, is));
+
+    //
+      break;
+
+    case 4:
+    //
+    //
+    // another: SCENE 2 SETUP   
+      //console.log("JT_tracer0-Scene file: CScene.initScene(",num,") NOT YET IMPLEMENTED.");    //
+      //this.initScene(0); // use default scene
+
+      // create our list of CGeom shapes that fill our 3D scene:
+      //---Ground Plane-----
+      // draw this in world-space; no transforms!
+      this.item.push(new CGeom(RT_GNDPLANE));   // Append gnd-plane to item[] array
+      iNow = this.item.length -1;               // get its array index.
+                                                // use default colors.
+                                                // no transforms needed.
+      this.item[iNow].matlIndex = 0;  // set material index in matter[] MASON
+
+      //-----Sphere 1-----
+      this.item.push(new CGeom(RT_SPHERE));       // Append sphere to item[] &
+      iNow = this.item.length -1;                 // get its array index.
+      // Initially leave sphere at the origin. Once you see it, then
+      // move it to a more-sensible location:
+      this.item[iNow].setIdent();                   // start in world coord axes
+      this.item[iNow].rayTranslate(1.2,-1.0, 3.0);  // move rightwards (+x),
+      this.item[iNow].rayScale(0.5, 0.5, 3.0);
+      // and toward camera (-y) enough to stay clear of disks, and up by 1 to
+      // make this radius==1 sphere rest on gnd-plane.
+      this.item[iNow].matlIndex = 1;  // set material index in matter[] MASON
+
+      //-----Sphere 2-----
+      this.item.push(new CGeom(RT_SPHERE));       // Append sphere to item[] &
+      iNow = this.item.length -1;                 // get its array index.
+      // Initially leave sphere at the origin. Once you see it, then
+      // move it to a more-sensible location:
+      this.item[iNow].setIdent();                   // start in world coord axes
+      this.item[iNow].rayTranslate(2.7,-1.0, 2.5);  // move rightwards (+x),
+      this.item[iNow].rayScale(0.5, 0.5, 2.0);
+      // and toward camera (-y) enough to stay clear of disks, and up by 1 to
+      // make this radius==1 sphere rest on gnd-plane.
+      this.item[iNow].matlIndex = 2;  // set material index in matter[] MASON
+
+      //-----Sphere 3-----
+      this.item.push(new CGeom(RT_SPHERE));       // Append sphere to item[] &
+      iNow = this.item.length -1;                 // get its array index.
+      // Initially leave sphere at the origin. Once you see it, then
+      // move it to a more-sensible location:
+      this.item[iNow].setIdent();                   // start in world coord axes
+      this.item[iNow].rayTranslate(-0.7,-2.0, 3.5);  // move rightwards (+x),
+      this.item[iNow].rayScale(0.5, 0.5, 1.0);
+      // and toward camera (-y) enough to stay clear of disks, and up by 1 to
+      // make this radius==1 sphere rest on gnd-plane.
+      this.item[iNow].matlIndex = 3;  // set material index in matter[] MASON
+
+      //-----Material 1----- MASON !!!!! need to add matlindex and Mateirals to other scense!!!
+      this.matter.push(new CMatl(15));
+
+      //-----Material 2----- MASON
+      this.matter.push(new CMatl(17));
+      //-----Material 2----- MASON
+      this.matter.push(new CMatl(18));
+      //-----Material 2----- MASON
+      this.matter.push(new CMatl(21));
+
+      //-----Light 1----- MASON
+      var ia = vec4.fromValues(1.0, 1.0, 1.0, 0.0);
+      var id = vec4.fromValues(1.0, 1.0, 1.0, 0.0);
+      var is = vec4.fromValues(1.0, 1.0, 1.0, 0.0);
+      //this.lamp.push(new CLight(vec4.fromValues(0.0, 0.0, 6.0, 1.0), ia, id, is));
+      this.lamp.push(new CLight(g_light1Pos, ia, id, is));
+
+      //-----Light 2----- MASON
+      var ia = vec4.fromValues(1.0, 1.0, 1.0, 0.0);
+      var id = vec4.fromValues(1.0, 1.0, 1.0, 0.0);
+      var is = vec4.fromValues(1.0, 1.0, 1.0, 0.0);
+      //this.lamp.push(new CLight(gui.camEyePt, ia, id, is));
+      //this.lamp.push(new CLight(vec4.fromValues(5.0, 0.0, 6.0, 1.0), ia, id, is));
+      this.lamp.push(new CLight(g_light1Pos, ia, id, is));
+
+    //
+      break;
+
     default:    // nonsensical 'sceneNum' value?
       console.log("JT_tracer0-Scene file: CScene.initScene(",num,") NOT YET IMPLEMENTED.");
       this.initScene(0);   // init the default scene.

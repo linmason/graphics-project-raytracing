@@ -66,7 +66,7 @@ var g_myScene = new CScene(); // Create our ray-tracing object;
                         // CImgBuf object 'g_myPic' given as argument.
 
 var g_SceneNum = 0;			// scene-selector number; 0,1,2,... G_SCENE_MAX-1
-var G_SCENE_MAX = 3;		// Number of scenes defined.
+var G_SCENE_MAX = 5;		// Number of scenes defined.
 
 var g_AAcode = 1;			// Antialiasing setting: 1 == NO antialiasing at all. 
                         // 2,3,4... == supersamples: 2x2, 3x3, 4x4, ...
