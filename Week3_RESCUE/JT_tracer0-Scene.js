@@ -665,7 +665,8 @@ CScene.prototype.findShade = function(myHit) {
   var light_colr = vec4.fromValues(0.0, 0.0, 0.0, 0.0);
   // if doesn't hit, return sky color
   if (myHit.hitGeom == -1) {
-    light_colr = vec4.fromValues(0.3, 0.8, 1.0, 1.0);
+    //light_colr = vec4.fromValues(0.3, 0.8, 1.0, 1.0);
+    light_colr = vec4.fromValues(0.3, 0.3, 0.3, 1.0);
     vec4.copy(myHit.colr, light_colr);
     return;
   }
@@ -736,24 +737,37 @@ CScene.prototype.findShade = function(myHit) {
         vec4.add(light_colr, light_colr, temp);
         //console.log(light_colr);
         //light_colr += this.lamp[i].is * myMat.K_spec * Math.pow(Math.max(0, (R_dot_V)), myMat.K_shiny);
-/*
+
         // check reflection depth
-        if (reflCount <= g_reflDepth) {
-          reflCount += 1;
+        if (this.reflCount < g_reflDepth) {
+          this.reflCount += 1;
 
           // compute mirror ray
-          var Vvec3 = vec3.fromValues(myHit.viewN[0], myHit.viewN[2], myHit.viewN[2]);
-          var N_dot_L = vec3.dot(Nvec3, Lvec3);
+          var Vvec3 = vec3.fromValues(myHit.viewN[0], myHit.viewN[1], myHit.viewN[2]);
+          var N_dot_V = vec3.dot(Nvec3, Vvec3);
           var Dvec3 = vec3.create();
-          vec3.scale(Dvec3, Nvec3, N_dot_L);
-          var Rvec3 = vec3.create();
-          vec3.subtract(Rvec3, vec3.scale(temp, Dvec3, 2.0), Lvec3);
-          R_dot_V = vec3.dot(Rvec3, vec3.fromValues(myHit.viewN[0], myHit.viewN[1], myHit.viewN[2]));
+          vec3.scale(Dvec3, Nvec3, N_dot_V);
+          var Mvec3 = vec3.create();
+          vec3.subtract(Mvec3, vec3.scale(temp, Dvec3, 2.0), Vvec3);
 
           // traceray for mirror reflection
+          var mirrorRay = new CRay();
+          vec4.copy(mirrorRay.orig, myHit.hitPt);
+          vec4.copy(mirrorRay.dir, vec4.fromValues(Mvec3[0], Mvec3[1], Mvec3[2], 0.0));
+          vec4.add(mirrorRay.orig, mirrorRay.orig, vec4.scale(temp, mirrorRay.dir, 100 * this.RAY_EPSILON));
+          var newReflMyHit = new CHit();
+          newReflMyHit.init();
+          this.traceRay(mirrorRay, newReflMyHit);
+          this.findShade(newReflMyHit);
 
           // add shade of new ray to light_colr
-        }*/
+          //console.log(this.reflCount)
+          //console.log(newReflMyHit.colr)
+          //console.log(vec4.scale(temp, newReflMyHit.colr, myMat.K_mirr[0]));
+          //console.log(light_colr);
+          vec4.add(light_colr, light_colr, vec4.scale(temp, newReflMyHit.colr, myMat.K_mirr[0]));
+          //console.log(light_colr);
+        }
 
       }
 

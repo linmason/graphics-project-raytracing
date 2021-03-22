@@ -79,6 +79,8 @@ var g_light2Enabled = true;
 var g_light1Pos = vec4.fromValues(-3.0, -4.0, 6.0, 1.0);
 var g_light2Pos = vec4.fromValues(3.0, -4.0, 6.0, 1.0);
 
+var g_reflDepth = 1;
+
 //--END---GLOBAL VARIABLES------------------------------------------------------
 
 function main() {
@@ -95,6 +97,7 @@ function main() {
   document.getElementById('light2x').value = g_light2Pos[0];
   document.getElementById('light2y').value = g_light2Pos[1];
   document.getElementById('light2z').value = g_light2Pos[2];
+  document.getElementById('reflDepth').value = g_reflDepth;
   // Retrieve the HTML-5 <canvas> element where webGL will draw our pictures:
   g_canvasID = document.getElementById('webgl');	
 
@@ -528,6 +531,15 @@ function onLight2PosButton() {
   var y = document.getElementById('light2y').value;
   var z = document.getElementById('light2z').value;
   g_light2Pos = vec4.fromValues(x, y, z, 1.0);
+
+  g_myScene.makeRayTracedImage(); // (near end of traceSupplement.js)     
+  rayView.switchToMe(); // be sure OUR VBO & shaders are in use, then
+  rayView.reload();     // re-transfer VBO contents and texture-map contents
+  drawAll();      // redraw BOTH viewports onscreen.
+}
+
+function onReflDepthButton() {
+  g_reflDepth = document.getElementById('reflDepth').value;
 
   g_myScene.makeRayTracedImage(); // (near end of traceSupplement.js)     
   rayView.switchToMe(); // be sure OUR VBO & shaders are in use, then
