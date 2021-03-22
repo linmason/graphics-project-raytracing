@@ -576,6 +576,7 @@ function CMatl(matlType) {
   this.K_spec = [];
   this.K_name = [];
   this.K_shiny = 0.0;
+  this.K_mirr = [];
 
   var MATL_RED_PLASTIC =    1;
   var MATL_GRN_PLASTIC =    2;
@@ -617,6 +618,7 @@ function CMatl(matlType) {
       this.K_diff.push(0.6,     0.0,    0.0,    1.0);
       this.K_spec.push(0.6,     0.6,    0.6,    1.0);   
       this.K_shiny = 100.0;
+      this.K_mirr.push(0.3,     0.3,    0.3,    1.0);
       this.K_name = "MATL_RED_PLASTIC";
       break;
     case MATL_GRN_PLASTIC: // 2
@@ -624,6 +626,7 @@ function CMatl(matlType) {
       this.K_ambi.push(0.05,    0.05,   0.05,   1.0);
       this.K_diff.push(0.0,     0.6,    0.0,    1.0);
       this.K_spec.push(0.2,     0.2,    0.2,    1.0);   
+      this.K_mirr.push(0.3,     0.3,    0.3,    1.0);
       this.K_shiny = 60.0;
       this.K_name = "MATL_GRN_PLASTIC";
       break;
@@ -632,6 +635,7 @@ function CMatl(matlType) {
       this.K_ambi.push(0.05,    0.05,   0.05,   1.0);
       this.K_diff.push(0.0,     0.2,    0.6,    1.0);
       this.K_spec.push(0.1,     0.2,    0.3,    1.0);   
+      this.K_mirr.push(0.3,     0.3,    0.3,    1.0);
       this.K_shiny = 5.0;
       this.K_name = "MATL_BLU_PLASTIC";
       break;
@@ -640,6 +644,7 @@ function CMatl(matlType) {
       this.K_ambi.push(0.0,     0.0,    0.0,    1.0);
       this.K_diff.push(0.01,    0.01,   0.01,   1.0);
       this.K_spec.push(0.5,     0.5,    0.5,    1.0);   
+      this.K_mirr.push(0.3,     0.3,    0.3,    1.0);
       this.K_shiny = 32.0;
       this.K_name = "MATL_BLACK_PLASTIC";
       break;
@@ -648,6 +653,7 @@ function CMatl(matlType) {
       this.K_ambi.push(0.02,    0.02,   0.02,   1.0);
       this.K_diff.push(0.01,    0.01,   0.01,   1.0);
       this.K_spec.push(0.4,     0.4,    0.4,    1.0);   
+      this.K_mirr.push(0.3,     0.3,    0.3,    1.0);
       this.K_shiny = 10.0;
       this.K_name = "MATL_BLACK_RUBBER";
       break;
@@ -656,6 +662,7 @@ function CMatl(matlType) {
       this.K_ambi.push(0.329412, 0.223529, 0.027451, 1.0);
       this.K_diff.push(0.780392, 0.568627, 0.113725, 1.0);
       this.K_spec.push(0.992157, 0.941176, 0.807843, 1.0);   
+      this.K_mirr.push(0.3,     0.3,    0.3,    1.0);
       this.K_shiny = 27.8974;
       this.K_name = "MATL_BRASS";
       break;
@@ -664,6 +671,7 @@ function CMatl(matlType) {
       this.K_ambi.push(0.2125,   0.1275,   0.054,    1.0);
       this.K_diff.push(0.714,    0.4284,   0.18144,  1.0);
       this.K_spec.push(0.393548, 0.271906, 0.166721, 1.0);  
+      this.K_mirr.push(0.3,     0.3,    0.3,    1.0);
       this.K_shiny = 25.6;
       this.K_name = "MATL_BRONZE_DULL";
       break;
@@ -672,6 +680,7 @@ function CMatl(matlType) {
       this.K_ambi.push(0.25,     0.148,    0.06475,  1.0);
       this.K_diff.push(0.4,      0.2368,   0.1036,   1.0);
       this.K_spec.push(0.774597, 0.458561, 0.200621, 1.0);  
+      this.K_mirr.push(0.3,     0.3,    0.3,    1.0);
       this.K_shiny = 76.8;
       this.K_name = "MATL_BRONZE_SHINY";
       break;
@@ -680,6 +689,7 @@ function CMatl(matlType) {
       this.K_ambi.push(0.25,     0.25,     0.25,     1.0);
       this.K_diff.push(0.4,      0.4,      0.4,      1.0);
       this.K_spec.push(0.774597, 0.774597, 0.774597, 1.0);  
+      this.K_mirr.push(0.3,     0.3,    0.3,    1.0);
       this.K_shiny = 76.8;
       this.K_name = "MATL_CHROME";
       break;
@@ -688,6 +698,7 @@ function CMatl(matlType) {
       this.K_ambi.push(0.19125,  0.0735,   0.0225,   1.0);
       this.K_diff.push(0.7038,   0.27048,  0.0828,   1.0);
       this.K_spec.push(0.256777, 0.137622, 0.086014, 1.0);  
+      this.K_mirr.push(0.3,     0.3,    0.3,    1.0);
       this.K_shiny = 12.8;
       this.K_name = "MATL_COPPER_DULL";
       break;
@@ -696,6 +707,7 @@ function CMatl(matlType) {
       this.K_ambi.push(0.2295,   0.08825,  0.0275,    1.0);
       this.K_diff.push(0.5508,   0.2118,   0.066,     1.0);
       this.K_spec.push(0.580594, 0.223257, 0.0695701, 1.0);  
+      this.K_mirr.push(0.3,     0.3,    0.3,    1.0);
       this.K_shiny = 51.2;
       this.K_name = "MATL_COPPER_SHINY";
       break;
@@ -704,6 +716,7 @@ function CMatl(matlType) {
       this.K_ambi.push(0.24725,  0.1995,   0.0745,   1.0);
       this.K_diff.push(0.75164,  0.60648,  0.22648,  1.0);
       this.K_spec.push(0.628281, 0.555802, 0.366065, 1.0);  
+      this.K_mirr.push(0.3,     0.3,    0.3,    1.0);
       this.K_shiny = 51.2;
       this.K_name = "MATL_GOLD_DULL";
       break;
@@ -712,6 +725,7 @@ function CMatl(matlType) {
       this.K_ambi.push(0.24725,  0.2245,   0.0645,   1.0);
       this.K_diff.push(0.34615,  0.3143,   0.0903,   1.0);
       this.K_spec.push(0.797357, 0.723991, 0.208006, 1.0);  
+      this.K_mirr.push(0.3,     0.3,    0.3,    1.0);
       this.K_shiny = 83.2;
       this.K_name = "MATL_GOLD_SHINY";
       break;
@@ -720,6 +734,7 @@ function CMatl(matlType) {
       this.K_ambi.push(0.105882, 0.058824, 0.113725, 1.0);
       this.K_diff.push(0.427451, 0.470588, 0.541176, 1.0);
       this.K_spec.push(0.333333, 0.333333, 0.521569, 1.0);  
+      this.K_mirr.push(0.3,     0.3,    0.3,    1.0);
       this.K_shiny = 9.84615;
       this.K_name = "MATL_PEWTER";
       break;
@@ -728,6 +743,7 @@ function CMatl(matlType) {
       this.K_ambi.push(0.19225,  0.19225,  0.19225,  1.0);
       this.K_diff.push(0.50754,  0.50754,  0.50754,  1.0);
       this.K_spec.push(0.508273, 0.508273, 0.508273, 1.0);  
+      this.K_mirr.push(0.3,     0.3,    0.3,    1.0);
       this.K_shiny = 51.2;
       this.K_name = "MATL_SILVER_DULL";
       break;
@@ -736,6 +752,7 @@ function CMatl(matlType) {
       this.K_ambi.push(0.23125,  0.23125,  0.23125,  1.0);
       this.K_diff.push(0.2775,   0.2775,   0.2775,   1.0);
       this.K_spec.push(0.773911, 0.773911, 0.773911, 1.0);  
+      this.K_mirr.push(0.3,     0.3,    0.3,    1.0);
       this.K_shiny = 89.6;
       this.K_name = "MATL_SILVER_SHINY";
       break;
@@ -744,6 +761,7 @@ function CMatl(matlType) {
       this.K_ambi.push(0.0215,  0.1745,   0.0215,  0.55);
       this.K_diff.push(0.07568, 0.61424,  0.07568, 0.55);
       this.K_spec.push(0.633,   0.727811, 0.633,   0.55);   
+      this.K_mirr.push(0.3,     0.3,    0.3,    1.0);
       this.K_shiny = 76.8;
       this.K_name = "MATL_EMERALD";
       break;
@@ -752,6 +770,7 @@ function CMatl(matlType) {
       this.K_ambi.push(0.135,    0.2225,   0.1575,   0.95);
       this.K_diff.push(0.54,     0.89,     0.63,     0.95);
       this.K_spec.push(0.316228, 0.316228, 0.316228, 0.95);   
+      this.K_mirr.push(0.3,     0.3,    0.3,    1.0);
       this.K_shiny = 12.8;
       this.K_name = "MATL_JADE";
       break;
@@ -760,6 +779,7 @@ function CMatl(matlType) {
       this.K_ambi.push(0.05375,  0.05,     0.06625,  0.82);
       this.K_diff.push(0.18275,  0.17,     0.22525,  0.82);
       this.K_spec.push(0.332741, 0.328634, 0.346435, 0.82);   
+      this.K_mirr.push(0.3,     0.3,    0.3,    1.0);
       this.K_shiny = 38.4;
       this.K_name = "MATL_OBSIDIAN";
       break;
@@ -768,6 +788,7 @@ function CMatl(matlType) {
       this.K_ambi.push(0.25,     0.20725,  0.20725,  0.922);
       this.K_diff.push(1.0,      0.829,    0.829,    0.922);
       this.K_spec.push(0.296648, 0.296648, 0.296648, 0.922);   
+      this.K_mirr.push(0.3,     0.3,    0.3,    1.0);
       this.K_shiny = 11.264;
       this.K_name = "MATL_PEARL";
       break;
@@ -776,6 +797,7 @@ function CMatl(matlType) {
       this.K_ambi.push(0.1745,   0.01175,  0.01175,  0.55);
       this.K_diff.push(0.61424,  0.04136,  0.04136,  0.55);
       this.K_spec.push(0.727811, 0.626959, 0.626959, 0.55);   
+      this.K_mirr.push(0.3,     0.3,    0.3,    1.0);
       this.K_shiny = 76.8;
       this.K_name = "MATL_RUBY";
       break;
@@ -784,6 +806,7 @@ function CMatl(matlType) {
       this.K_ambi.push(0.1,      0.18725,  0.1745,   0.8);
       this.K_diff.push(0.396,    0.74151,  0.69102,  0.8);
       this.K_spec.push(0.297254, 0.30829,  0.306678, 0.8);   
+      this.K_mirr.push(0.3,     0.3,    0.3,    1.0);
       this.K_shiny = 12.8;
       this.K_name = "MATL_TURQUOISE";
       break;
@@ -793,6 +816,7 @@ function CMatl(matlType) {
       this.K_ambi.push(0.0, 0.0, 0.0, 1.0); // r,g,b,alpha  ambient reflectance
       this.K_diff.push(0.0, 0.0, 0.0, 1.0); //              diffuse reflectance
       this.K_spec.push(0.0, 0.0, 0.0, 1.0); //              specular reflectance
+      this.K_mirr.push(0.3,     0.3,    0.3,    1.0);
       this.K_shiny = 1.0;       // Default (don't set specular exponent to zero!)
       this.K_name = "DEFAULT_RED";
       break;

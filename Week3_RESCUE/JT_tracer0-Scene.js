@@ -714,7 +714,7 @@ CScene.prototype.findShade = function(myHit) {
       //console.log(shadow);
       if (!shadow) {
         var Nvec3 = vec3.fromValues(myHit.surfNorm[0], myHit.surfNorm[1], myHit.surfNorm[2]);
-        var Lvec3 = vec3.fromValues(lightRay.dir[0], lightRay.dir[2], lightRay.dir[2]);
+        var Lvec3 = vec3.fromValues(lightRay.dir[0], lightRay.dir[1], lightRay.dir[2]);
         var N_dot_L = vec3.dot(Nvec3, Lvec3);
 
         // Compute Refected and view vector, dot them
@@ -736,6 +736,25 @@ CScene.prototype.findShade = function(myHit) {
         vec4.add(light_colr, light_colr, temp);
         //console.log(light_colr);
         //light_colr += this.lamp[i].is * myMat.K_spec * Math.pow(Math.max(0, (R_dot_V)), myMat.K_shiny);
+/*
+        // check reflection depth
+        if (reflCount <= g_reflDepth) {
+          reflCount += 1;
+
+          // compute mirror ray
+          var Vvec3 = vec3.fromValues(myHit.viewN[0], myHit.viewN[2], myHit.viewN[2]);
+          var N_dot_L = vec3.dot(Nvec3, Lvec3);
+          var Dvec3 = vec3.create();
+          vec3.scale(Dvec3, Nvec3, N_dot_L);
+          var Rvec3 = vec3.create();
+          vec3.subtract(Rvec3, vec3.scale(temp, Dvec3, 2.0), Lvec3);
+          R_dot_V = vec3.dot(Rvec3, vec3.fromValues(myHit.viewN[0], myHit.viewN[1], myHit.viewN[2]));
+
+          // traceray for mirror reflection
+
+          // add shade of new ray to light_colr
+        }*/
+
       }
 
     }
@@ -815,6 +834,7 @@ CScene.prototype.makeRayTracedImage = function() {
           this.rayCam.setEyeRay(this.eyeRays[u*g_AAcode + v], sample_i, sample_j);
 
           // Refactor below traceRay into function to return list of CHit/find CHit closest MASON
+          this.reflCount = 0;  // !!!!!! counts recursion
           myHit.init();     // start by clearing our 'nearest hit-point', and
           this.traceRay(this.eyeRays[u*g_AAcode + v], myHit);
 
